@@ -1,8 +1,9 @@
-﻿using Rentals.Domain.Enums;
+﻿using Rentals.Application.Abstraction;
+using Rentals.Domain.Enums;
 
 namespace Rentals.Domain.Entities
 {
-    public class Customer
+    public class Customer : BaseEntity
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
@@ -15,8 +16,6 @@ namespace Rentals.Domain.Entities
         public CustomerStatus Status { get; set; }
 
         public bool IsActive { get; set; }
-
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public ICollection<Rental> Rentals { get; set; } = new List<Rental>();
 

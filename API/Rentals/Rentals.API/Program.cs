@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Rentals.Infrastructure;
+using Rentals.Infrastructure.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-builder.Services.AddDbContext<RentalsDbContext>(options => options.UseMySQL(builder.Configuration.GetConnectionString("ConnectionString")));
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseMySQL(builder.Configuration.GetConnectionString("ConnectionString")));
 
 var app = builder.Build();
 

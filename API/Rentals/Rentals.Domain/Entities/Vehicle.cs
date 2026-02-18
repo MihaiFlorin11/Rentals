@@ -1,12 +1,10 @@
-﻿using Rentals.Domain.Enums;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Rentals.Application.Abstraction;
+using Rentals.Domain.Enums;
 
 namespace Rentals.Domain.Entities
 {
-    public class Vehicle
+    public class Vehicle : BaseEntity
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
-
         public string PlateNumber { get; set; } = string.Empty;
 
         public VehicleStatus Status { get; set; }
@@ -16,10 +14,6 @@ namespace Rentals.Domain.Entities
         public decimal LastKnownLatitude { get; set; } = decimal.Zero;
 
         public decimal LastKnownLongitude { get; set; } = decimal.Zero;
-
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-        public DateTime UpdatedAt { get; set; }
 
         public VehicleType VehicleType { get; set; } = new VehicleType();
 

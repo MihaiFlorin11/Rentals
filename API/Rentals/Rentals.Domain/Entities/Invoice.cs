@@ -1,11 +1,10 @@
-﻿using Rentals.Domain.Enums;
+﻿using Rentals.Application.Abstraction;
+using Rentals.Domain.Enums;
 
 namespace Rentals.Domain.Entities
 {
-    public class Invoice
+    public class Invoice : BaseEntity
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
-
         public DateTime IssueDate { get; set; }
 
         public decimal SubtotalAmount { get; set; }
