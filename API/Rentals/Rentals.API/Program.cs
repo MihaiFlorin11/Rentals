@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Rentals.Application.Abstraction;
 using Rentals.Infrastructure.Context;
+using Rentals.Infrastructure.DatabaseSettings;
+using Rentals.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +20,19 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-builder.Services.AddDbContext<DatabaseContext>(options => options.UseMySQL(builder.Configuration.GetConnectionString("ConnectionString")));
+builder.Services.Configure<DbSettings>(
+    builder.Configuration.GetSection(nameof(DbSettings)));
+
+builder.Services.AddDbContext<DatabaseContext>((serviceProvider, options) =>
+{
+    var dbSettings = serviceProvider
+        .GetRequiredService<IOptions<DbSettings>>()
+        .Value;
+
+    options.UseMySQL(dbSettings.ConnectionString);
+});
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
