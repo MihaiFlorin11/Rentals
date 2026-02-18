@@ -14,9 +14,9 @@ namespace Rentals.Domain.Entities
 
         public CustomerStatus Status { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public bool IsActive { get; set; }
 
-        public DateTime UpdatedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public ICollection<Rental> Rentals { get; set; } = new List<Rental>();
 
